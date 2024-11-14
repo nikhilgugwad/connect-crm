@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-dk0-txz3e3n)o&*#c8#kfa%r7c5mw#20_yaadgai!*e-)lp2#-'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://connectcrm-bb1693933592.herokuapp.com/']
 
 
 # Application definition
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
 
     # Custom app
     'api',
+    'whitenoise.runserver_nostatic',
 ]
 
 
@@ -86,11 +89,11 @@ WSGI_APPLICATION = 'connectcrm.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'connectcrm_db',
-        'USER': 'usernikhil',  # Your MySQL username
-        'PASSWORD': 'usernikhil123',  # Your MySQL password
-        'HOST': 'localhost',  # or '127.0.0.1'
-        'PORT': '3306',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT', default='3306'),
     }
 }
 
@@ -145,4 +148,9 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',  # Ensure user is authenticated
     ),
 }
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
 
