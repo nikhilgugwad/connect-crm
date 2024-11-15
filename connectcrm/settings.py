@@ -27,8 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://connectcrm-bb1693933592.herokuapp.com']
-
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'connectcrm-bb1693933592.herokuapp.com']
 
 # Application definition
 
@@ -49,6 +48,7 @@ INSTALLED_APPS = [
     # Custom app
     'api',
     'whitenoise.runserver_nostatic',
+    'corsheaders',
 ]
 
 
@@ -61,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'connectcrm.urls'
@@ -132,7 +133,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+# Define the directory for static files
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -152,6 +154,9 @@ REST_FRAMEWORK = {
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+# Set the static files storage to WhiteNoise's static storage
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 
