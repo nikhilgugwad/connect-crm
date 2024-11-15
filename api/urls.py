@@ -5,17 +5,14 @@ from .views import CustomUserViewSet, CustomerViewSet, SalesOpportunityViewSet, 
 
 # Create a router and register viewsets
 router = DefaultRouter()
-router.register(r'interactions', InteractionViewSet)  # Register first for clarity
-router.register(r'users', CustomUserViewSet)
-router.register(r'customers', CustomerViewSet)
-router.register(r'opportunities', SalesOpportunityViewSet)
+router.register(r'interactions', InteractionViewSet)  # Handle interaction data
+router.register(r'users', CustomUserViewSet)  # Handle user data
+router.register(r'customers', CustomerViewSet)  # Handle customer data
+router.register(r'opportunities', SalesOpportunityViewSet)  # Handle sales opportunities
 
-# Map the interactions endpoint directly to verify view accessibility
+# API URL patterns
 urlpatterns = [
     path('', include(router.urls)),  # Include router for all registered viewsets
-    path('token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+    path('token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),  # Obtain JWT token
+    path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),  # Refresh JWT token
 ]
-
-
-

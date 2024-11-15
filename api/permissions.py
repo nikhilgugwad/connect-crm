@@ -2,21 +2,26 @@ from rest_framework.permissions import BasePermission
 
 class IsAdmin(BasePermission):
     """
-    Allows access only to users with the 'admin' role.
+    Custom permission to grant access only to users with the 'admin' role.
     """
     def has_permission(self, request, view):
+        # Check if the authenticated user has the 'admin' role
         return request.user.role == 'admin'
+
 
 class IsSalesperson(BasePermission):
     """
-    Allows access only to users with the 'sales' role.
+    Custom permission to grant access only to users with the 'sales' role.
     """
     def has_permission(self, request, view):
+        # Check if the authenticated user has the 'sales' role
         return request.user.role == 'sales'
+
 
 class IsCustomer(BasePermission):
     """
-    Allows access only to users with the 'customer' role.
+    Custom permission to grant access only to users with the 'customer' role.
     """
     def has_permission(self, request, view):
+        # Check if the authenticated user has the 'customer' role
         return request.user.role == 'customer'
