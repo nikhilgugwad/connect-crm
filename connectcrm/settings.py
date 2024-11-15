@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://connectcrm-bb1693933592.herokuapp.com/']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://connectcrm-bb1693933592.herokuapp.com']
 
 
 # Application definition
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',  # Django REST Framework
     'rest_framework.authtoken',  # Token-based authentication if needed
     'drf_yasg',  # Swagger documentation
+    'rest_framework_simplejwt',  # Make sure this is added
 
     # Custom app
     'api',
